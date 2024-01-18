@@ -71,7 +71,8 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_PACKAGES += \
-    libavservices_minijail.vendor
+    libavservices_minijail.vendor \
+    vendor.qti.hardware.capabilityconfigstore@1.0.vendor
 
 # MotoActions
 PRODUCT_PACKAGES += \
