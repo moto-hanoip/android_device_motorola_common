@@ -131,6 +131,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.upgrade_pressure=40 \
     ro.lmk.downgrade_pressure=60
 
+# Log
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.log.tag.OpenGLRenderer=S
+
 # Kernel
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.kernel_version=$(TARGET_KERNEL_VERSION)
