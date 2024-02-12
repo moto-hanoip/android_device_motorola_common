@@ -1,0 +1,9 @@
+allow flags_health_check aac_drc_prop:file { open getattr map };
+allow flags_health_check ab_update_gki_prop:file { open getattr };
+allow flags_health_check adaptive_haptics_prop:file { open getattr map };
+allow flags_health_check audio_config_prop:file { open getattr map };
+allow flags_health_check bluetooth_a2dp_offload_prop:file { open getattr };
+allow flags_health_check bluetooth_audio_hal_prop:file { open getattr map };
+allow flags_health_check bluetooth_prop:file { open getattr };
+allow flags_health_check build_attestation_prop:file { open getattr map };
+allow flags_health_check build_bootimage_prop:file { open getattr };
