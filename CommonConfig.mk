@@ -16,15 +16,7 @@
 COMMON_PATH := device/motorola/common
 
 # Hardware
-## Mediatek
-ifeq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  include $(COMMON_PATH)/hardware/mediatek/board.mk
-endif
-
-## QCOM
-ifeq ($(PRODUCT_USES_QCOM_HARDWARE),true)
-  include $(COMMON_PATH)/hardware/qcom/board.mk
-endif
+include $(COMMON_PATH)/hardware/qcom/board.mk
 
 # Fixes
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -46,12 +38,6 @@ ifeq ($(TARGET_HAS_VBMETA_SYSTEM),true)
   BOARD_AVB_VBMETA_SYSTEM_ALGORITHM ?= SHA256_RSA2048
   BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
   BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION ?= 1
-endif
-ifeq ($(TARGET_HAS_RECOVERY_AVB),true)
-  BOARD_AVB_RECOVERY_ALGORITHM ?= SHA256_RSA4096
-  BOARD_AVB_RECOVERY_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
-  BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-  BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION ?= 2
 endif
 
 # Boot Image
@@ -164,12 +150,7 @@ include device/sony/sepolicy/sepolicy.mk
 BOARD_USE_ENFORCING_SELINUX ?= true
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
-ifeq ($(PRODUCT_USES_QCOM_HARDWARE),true)
-  BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor_qcom
-endif
-ifeq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor_mtk
-endif
+BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor_qcom
 
 # VINTF
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/manifest.xml
@@ -181,18 +162,14 @@ endif
 ifneq ($(TARGET_USES_FINGERPRINT_V2_1),false)
   DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/android.hardware.biometrics.fingerprint_v2.1.xml
 endif
-ifeq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/manifest-mtk.xml
-  TARGET_USES_TETHER_V1_1 := true
-else
-  ifeq ($(call is-kernel-greater-than-or-equal-to,5.10),true)
+ifeq ($(call is-kernel-greater-than-or-equal-to,5.10),true)
     DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/manifest-qcom-5.10.xml
-  else
+else
     DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/manifest-qcom.xml
-  endif
-  ifeq ($(TARGET_USES_CAMERA_V2_4),true)
+endif
+ifeq ($(TARGET_USES_CAMERA_V2_4),true)
     DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/android.hardware.camera.provider_v2.4.xml
-  endif
+endif
 endif
 ifeq ($(TARGET_USES_TETHER_V1_1),true)
   DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/tether_v1.1.xml

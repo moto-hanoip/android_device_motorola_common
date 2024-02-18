@@ -152,17 +152,12 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@2.0.vendor
-
-ifneq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  PRODUCT_PACKAGES += \
-      android.hardware.sensors@2.0-service.multihal
-endif
+    android.hardware.sensors@2.0.vendor \
+    android.hardware.sensors@2.0-service.multihal
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0.vendor \
-    android.hardware.thermal@2.0.vendor
+    android.hardware.thermal@2.0-service.qti
 
 # USB HAL
 PRODUCT_PACKAGES += \

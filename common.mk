@@ -66,12 +66,6 @@ PRODUCT_PACKAGES += \
     protobuf_symlinks
 
 # FSTab Handling
-## Define suffix for fstab
-ifeq ($(PRODUCT_USES_QCOM_HARDWARE),true) # QCOM uses qcom
-  FSTAB_SUFFIX := qcom
-else ifeq ($(PRODUCT_USES_MTK_HARDWARE),true) # MTK uses board platform
-  FSTAB_SUFFIX := $(TARGET_BOARD_PLATFORM)
-endif
 
 ## Select fstab path based on vendor_boot and recovery's existence
 fstab_path := $(PLATFORM_COMMON_PATH)/rootdir/$(call select-fstab)
@@ -79,19 +73,19 @@ ifeq ($(call has-partition,vendor_boot),false)
   ifeq ($(AB_OTA_UPDATER),true)
     ifeq ($(call has-partition,recovery),true)
       PRODUCT_COPY_FILES += \
-          $(fstab_path):$(TARGET_COPY_OUT_RAMDISK)/fstab.$(FSTAB_SUFFIX)
+          $(fstab_path):$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
     else
       PRODUCT_COPY_FILES += \
-          $(fstab_path):$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.$(FSTAB_SUFFIX)
+          $(fstab_path):$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.qcom
     endif
   endif
 else
   PRODUCT_COPY_FILES += \
-      $(fstab_path):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.$(FSTAB_SUFFIX)
+      $(fstab_path):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
 endif
 ## Always copy fstab to vendor
 PRODUCT_COPY_FILES += \
-    $(fstab_path):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(FSTAB_SUFFIX)
+    $(fstab_path):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom
 
 ## Sanity check fstab to prevent boot issues
 ## First check the expected partition type
@@ -122,20 +116,13 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
-# Mediatek
-ifeq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  include $(COMMON_PATH)/hardware/mediatek/product.mk
-endif
-
 # NFC
 ifneq (,$(filter $(TARGET_USES_NXP_NFC) $(TARGET_USES_ST_NFC) $(TARGET_USES_SEC_NFC), true))
   DEVICE_CHARACTERISTICS += nfc
 endif
 
 # QCOM
-ifeq ($(PRODUCT_USES_QCOM_HARDWARE),true)
-  include $(COMMON_PATH)/hardware/qcom/product.mk
-endif
+include $(COMMON_PATH)/hardware/qcom/product.mk
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(fstab_path)

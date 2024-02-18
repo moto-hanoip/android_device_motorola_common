@@ -39,9 +39,6 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.bluetooth.default \
-    libalsautils \
-    libaudiofoundation.vendor \
-    libnbaio_mono \
     libtinycompress \
     tinymix
 
