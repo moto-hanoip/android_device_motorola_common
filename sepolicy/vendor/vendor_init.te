@@ -9,3 +9,18 @@ set_prop(vendor_init, vendor_mot_prop)
 
 # Sku prop
 set_prop(vendor_init, vendor_sku_prop)
+
+# Bluetooth prop
+set_prop(vendor_init, bluetooth_prop)
+
+# Default prop
+set_prop(vendor_init, default_prop)
+
+# Camera prop
+set_prop(vendor_init, vendor_camera_prop)
+
+# Radio prop
+set_prop(vendor_init, radio_prop)
+
+# CND prop
+set_prop(vendor_init, vendor_cnd_prop)
