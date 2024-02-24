@@ -1,1 +1,6 @@
 allow untrusted_app_32 proc_zoneinfo:file r_file_perms;
+allow untrusted_app_32 proc:file read;
+allow untrusted_app_32 proc_tty_drivers:file read;
+allow untrusted_app_32 qemu_hw_prop:file read;
+allow untrusted_app_32 qemu_sf_lcd_density_prop:file read;
+allow untrusted_app_32 serialno_prop:file read;
