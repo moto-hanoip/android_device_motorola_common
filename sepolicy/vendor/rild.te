@@ -10,6 +10,9 @@ allow rild mnt_vendor_file:dir search;
 # Moto props
 get_prop(rild, vendor_mot_prop)
 
+# Radio props
+set_prop(rild, vendor_radio_prop)
+
 # Sensors - sar!
 allow rild fwk_sensor_hwservice:hwservice_manager find;
 allow rild fwk_sensor_service:service_manager find;

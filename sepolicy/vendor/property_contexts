@@ -15,3 +15,9 @@ vendor.nfc.fw_status u:object_r:vendor_nfc_prop:s0
 ro.boot.product.vendor.sku u:object_r:vendor_sku_prop:s0
 ro.boot.product.hardware.sku u:object_r:vendor_sku_prop:s0
 vendor.boot.product.hardware.sku u:object_r:vendor_sku_prop:s0
+
+# Power
+vendor.powerhal. u:object_r:vendor_power_prop:s0
+
+# Radio
+vendor.ril. u:object_r:vendor_radio_prop:s0

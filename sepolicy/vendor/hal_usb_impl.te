@@ -7,6 +7,15 @@ init_daemon_domain(hal_usb_impl)
 
 # Battery Supply
 r_dir_file(hal_usb_impl, sysfs_batteryinfo)
+r_dir_file(hal_usb_impl, vendor_sysfs_battery_supply) 
 allow hal_usb_impl sysfs_batteryinfo:file w_file_perms;
+allow hal_usb_impl vendor_sysfs_battery_supply:file w_file_perms; 
 
 allow hal_usb_impl functionfs:dir { watch watch_reads };
+
+set_prop(hal_usb_impl, vendor_usb_prop)
+r_dir_file(hal_usb_impl, vendor_sysfs_usb_c)
+
+r_dir_file(hal_usb_impl, vendor_sysfs_usb_supply)
+allow hal_usb_impl vendor_sysfs_usb_supply:file w_file_perms;
+

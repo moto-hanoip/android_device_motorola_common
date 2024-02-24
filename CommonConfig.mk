@@ -170,12 +170,6 @@ include device/sony/sepolicy/sepolicy.mk
 BOARD_USE_ENFORCING_SELINUX ?= true
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
-ifeq ($(PRODUCT_USES_QCOM_HARDWARE),true)
-  BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor_qcom
-endif
-ifeq ($(PRODUCT_USES_MTK_HARDWARE),true)
-  BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor_mtk
-endif
 
 # VINTF
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/manifest.xml

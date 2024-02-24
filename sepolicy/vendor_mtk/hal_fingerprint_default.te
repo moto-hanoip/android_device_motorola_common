@@ -1,3 +1,0 @@
-allow hal_fingerprint_default fingerprint_device:chr_file { open read write ioctl getattr };
-
-allow hal_fingerprint_default persist_data_file:dir search;
